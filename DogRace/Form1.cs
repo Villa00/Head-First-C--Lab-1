@@ -94,6 +94,8 @@ namespace DogRace
                 dog.Location = 0;
             }
             timer1.Start();
+            betButton.Enabled = false;
+            raceButton.Enabled = false;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -116,6 +118,8 @@ namespace DogRace
                 guy.Collect(Winner);
                 guy.UpdateLabels();
             }
+            betButton.Enabled = true;
+            raceButton.Enabled = true;
         }
 
         private void bobRadioButton_CheckedChanged(object sender, EventArgs e)
