@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.trackPictureBox = new System.Windows.Forms.PictureBox();
             this.dog4PictureBox = new System.Windows.Forms.PictureBox();
@@ -60,19 +61,29 @@
             ((System.ComponentModel.ISupportInitialize)(this.dog1PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 22;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // trackPictureBox
             // 
-            this.trackPictureBox.Location = new System.Drawing.Point(119, 12);
+            this.trackPictureBox.ErrorImage = null;
+            this.trackPictureBox.Image = global::DogRace.Properties.Resources.racetrack;
+            this.trackPictureBox.Location = new System.Drawing.Point(13, 12);
             this.trackPictureBox.Name = "trackPictureBox";
-            this.trackPictureBox.Size = new System.Drawing.Size(436, 219);
+            this.trackPictureBox.Size = new System.Drawing.Size(602, 200);
             this.trackPictureBox.TabIndex = 0;
             this.trackPictureBox.TabStop = false;
             // 
             // dog4PictureBox
             // 
+            this.dog4PictureBox.ErrorImage = null;
+            this.dog4PictureBox.Image = ((System.Drawing.Image)(resources.GetObject("dog4PictureBox.Image")));
             this.dog4PictureBox.Location = new System.Drawing.Point(12, 180);
             this.dog4PictureBox.Name = "dog4PictureBox";
-            this.dog4PictureBox.Size = new System.Drawing.Size(100, 50);
+            this.dog4PictureBox.Size = new System.Drawing.Size(95, 32);
+            this.dog4PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.dog4PictureBox.TabIndex = 4;
             this.dog4PictureBox.TabStop = false;
             // 
@@ -94,19 +105,20 @@
             this.betGroupBox.Controls.Add(this.minimumBetLabel);
             this.betGroupBox.Location = new System.Drawing.Point(13, 237);
             this.betGroupBox.Name = "betGroupBox";
-            this.betGroupBox.Size = new System.Drawing.Size(542, 171);
+            this.betGroupBox.Size = new System.Drawing.Size(602, 171);
             this.betGroupBox.TabIndex = 5;
             this.betGroupBox.TabStop = false;
             this.betGroupBox.Text = "Betting Parlor";
             // 
             // raceButton
             // 
-            this.raceButton.Location = new System.Drawing.Point(386, 34);
+            this.raceButton.Location = new System.Drawing.Point(431, 32);
             this.raceButton.Name = "raceButton";
-            this.raceButton.Size = new System.Drawing.Size(150, 99);
+            this.raceButton.Size = new System.Drawing.Size(143, 99);
             this.raceButton.TabIndex = 13;
             this.raceButton.Text = "Race!";
             this.raceButton.UseVisualStyleBackColor = true;
+            this.raceButton.Click += new System.EventHandler(this.raceButton_Click);
             // 
             // dogNumericUpDown
             // 
@@ -142,9 +154,24 @@
             // amountNumericUpDown
             // 
             this.amountNumericUpDown.Location = new System.Drawing.Point(131, 113);
+            this.amountNumericUpDown.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.amountNumericUpDown.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             this.amountNumericUpDown.Name = "amountNumericUpDown";
             this.amountNumericUpDown.Size = new System.Drawing.Size(51, 20);
             this.amountNumericUpDown.TabIndex = 10;
+            this.amountNumericUpDown.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             // 
             // betButton
             // 
@@ -155,6 +182,7 @@
             this.betButton.TabIndex = 9;
             this.betButton.Text = "Bets";
             this.betButton.UseVisualStyleBackColor = true;
+            this.betButton.Click += new System.EventHandler(this.betButton_Click);
             // 
             // bettorLabel
             // 
@@ -170,7 +198,7 @@
             this.alBetLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.alBetLabel.Location = new System.Drawing.Point(216, 78);
             this.alBetLabel.Name = "alBetLabel";
-            this.alBetLabel.Size = new System.Drawing.Size(100, 17);
+            this.alBetLabel.Size = new System.Drawing.Size(139, 17);
             this.alBetLabel.TabIndex = 7;
             this.alBetLabel.Text = "label3";
             // 
@@ -179,7 +207,7 @@
             this.bobBetLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.bobBetLabel.Location = new System.Drawing.Point(216, 55);
             this.bobBetLabel.Name = "bobBetLabel";
-            this.bobBetLabel.Size = new System.Drawing.Size(100, 17);
+            this.bobBetLabel.Size = new System.Drawing.Size(139, 17);
             this.bobBetLabel.TabIndex = 6;
             this.bobBetLabel.Text = "label2";
             // 
@@ -188,7 +216,7 @@
             this.joeBetLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.joeBetLabel.Location = new System.Drawing.Point(216, 34);
             this.joeBetLabel.Name = "joeBetLabel";
-            this.joeBetLabel.Size = new System.Drawing.Size(100, 15);
+            this.joeBetLabel.Size = new System.Drawing.Size(139, 15);
             this.joeBetLabel.TabIndex = 5;
             this.joeBetLabel.Text = "label1";
             // 
@@ -210,6 +238,7 @@
             this.alRadioButton.TabIndex = 3;
             this.alRadioButton.Text = "radioButton3";
             this.alRadioButton.UseVisualStyleBackColor = true;
+            this.alRadioButton.CheckedChanged += new System.EventHandler(this.alRadioButton_CheckedChanged);
             // 
             // bobRadioButton
             // 
@@ -220,6 +249,7 @@
             this.bobRadioButton.TabIndex = 2;
             this.bobRadioButton.Text = "radioButton2";
             this.bobRadioButton.UseVisualStyleBackColor = true;
+            this.bobRadioButton.CheckedChanged += new System.EventHandler(this.bobRadioButton_CheckedChanged);
             // 
             // joeRadioButton
             // 
@@ -232,6 +262,7 @@
             this.joeRadioButton.TabStop = true;
             this.joeRadioButton.Text = "radioButton1";
             this.joeRadioButton.UseVisualStyleBackColor = true;
+            this.joeRadioButton.CheckedChanged += new System.EventHandler(this.joeRadioButton_CheckedChanged);
             // 
             // minimumBetLabel
             // 
@@ -244,25 +275,34 @@
             // 
             // dog3PictureBox
             // 
+            this.dog3PictureBox.ErrorImage = null;
+            this.dog3PictureBox.Image = ((System.Drawing.Image)(resources.GetObject("dog3PictureBox.Image")));
             this.dog3PictureBox.Location = new System.Drawing.Point(11, 124);
             this.dog3PictureBox.Name = "dog3PictureBox";
-            this.dog3PictureBox.Size = new System.Drawing.Size(100, 50);
+            this.dog3PictureBox.Size = new System.Drawing.Size(95, 32);
+            this.dog3PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.dog3PictureBox.TabIndex = 6;
             this.dog3PictureBox.TabStop = false;
             // 
             // dog2PictureBox
             // 
+            this.dog2PictureBox.ErrorImage = null;
+            this.dog2PictureBox.Image = ((System.Drawing.Image)(resources.GetObject("dog2PictureBox.Image")));
             this.dog2PictureBox.Location = new System.Drawing.Point(12, 68);
             this.dog2PictureBox.Name = "dog2PictureBox";
-            this.dog2PictureBox.Size = new System.Drawing.Size(100, 50);
+            this.dog2PictureBox.Size = new System.Drawing.Size(95, 32);
+            this.dog2PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.dog2PictureBox.TabIndex = 7;
             this.dog2PictureBox.TabStop = false;
             // 
             // dog1PictureBox
             // 
+            this.dog1PictureBox.ErrorImage = null;
+            this.dog1PictureBox.Image = global::DogRace.Properties.Resources.dog;
             this.dog1PictureBox.Location = new System.Drawing.Point(12, 12);
             this.dog1PictureBox.Name = "dog1PictureBox";
-            this.dog1PictureBox.Size = new System.Drawing.Size(100, 50);
+            this.dog1PictureBox.Size = new System.Drawing.Size(95, 32);
+            this.dog1PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.dog1PictureBox.TabIndex = 8;
             this.dog1PictureBox.TabStop = false;
             // 
@@ -270,7 +310,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(567, 420);
+            this.ClientSize = new System.Drawing.Size(627, 420);
             this.Controls.Add(this.dog1PictureBox);
             this.Controls.Add(this.dog2PictureBox);
             this.Controls.Add(this.dog3PictureBox);
@@ -281,7 +321,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "A Day at the Races";
             ((System.ComponentModel.ISupportInitialize)(this.trackPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dog4PictureBox)).EndInit();
             this.betGroupBox.ResumeLayout(false);

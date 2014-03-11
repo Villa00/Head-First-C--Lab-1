@@ -12,36 +12,35 @@ namespace DogRace
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        Random MyRandomizer = new Random();
+        Greyhound[] Greyhounds = new Greyhound[4];
+        Guy[] Guys = new Guy[3];
+        Guy Bettor;
+
+        public void InitTrack()
         {
-            InitializeComponent();
-
-            Random MyRandomizer = new Random();
-            Greyhound[] GreyhoundArray = new Greyhound[4];
-            Guy[] GuyArray = new Guy[3];
-
-            GreyhoundArray[0] = new Greyhound()
+            Greyhounds[0] = new Greyhound()
             {
                 MyPictureBox = dog1PictureBox,
                 StartingPosition = dog1PictureBox.Left,
                 RacetrackLength = trackPictureBox.Width - dog1PictureBox.Width,
                 Randomizer = MyRandomizer
             };
-            GreyhoundArray[1] = new Greyhound()
+            Greyhounds[1] = new Greyhound()
             {
                 MyPictureBox = dog2PictureBox,
                 StartingPosition = dog2PictureBox.Left,
                 RacetrackLength = trackPictureBox.Width - dog2PictureBox.Width,
                 Randomizer = MyRandomizer
             };
-            GreyhoundArray[2] = new Greyhound()
+            Greyhounds[2] = new Greyhound()
             {
                 MyPictureBox = dog3PictureBox,
                 StartingPosition = dog3PictureBox.Left,
                 RacetrackLength = trackPictureBox.Width - dog3PictureBox.Width,
                 Randomizer = MyRandomizer
             };
-            GreyhoundArray[4] = new Greyhound()
+            Greyhounds[3] = new Greyhound()
             {
                 MyPictureBox = dog4PictureBox,
                 StartingPosition = dog4PictureBox.Left,
@@ -49,31 +48,106 @@ namespace DogRace
                 Randomizer = MyRandomizer
             };
 
-            GuyArray[0] = new Guy()
+            Guys[0] = new Guy()
             {
-                MyBet = new Bet() {Amount = 0},
                 Cash = 50,
                 Name = "Joe",
                 MyRadioButton = joeRadioButton,
                 MyLabel = joeBetLabel
             };
-            GuyArray[1] = new Guy()
+            Guys[1] = new Guy()
             {
-                MyBet = new Bet() { Amount = 0 },
                 Cash = 75,
                 Name = "Bob",
                 MyRadioButton = bobRadioButton,
                 MyLabel = bobBetLabel
             };
-            GuyArray[2] = new Guy()
+            Guys[2] = new Guy()
             {
-                MyBet = new Bet() { Amount = 0 },
                 Cash = 45,
                 Name = "Al",
                 MyRadioButton = alRadioButton,
                 MyLabel = alBetLabel
             };
 
+            Bettor = Guys[0];
+
+            foreach (Guy guy in Guys)
+            {
+                guy.UpdateLabels();
+            }
+
+            bettorLabel.Text = Guys[0].Name;
+            minimumBetLabel.Text = "Minimum bet: " + amountNumericUpDown.Value;
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+            InitTrack();
+        }
+
+        private void raceButton_Click(object sender, EventArgs e)
+        {
+            foreach (Greyhound dog in Greyhounds)
+            {
+                dog.Location = 0;
+            }
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            foreach (Greyhound dog in Greyhounds)
+            {
+                if (dog.Run())
+                {
+                    NewRace(Array.IndexOf(Greyhounds, dog)+1);
+                }
+            }
+
+        }
+
+        private void NewRace(int Winner)
+        {
+            timer1.Stop();
+            foreach (Guy guy in Guys)
+            {
+                guy.Collect(Winner);
+                guy.UpdateLabels();
+            }
+        }
+
+        private void bobRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (bobRadioButton.Checked)
+            {
+                Bettor = Guys[1];
+                bettorLabel.Text = Bettor.Name;
+            }
+        }
+
+        private void alRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (alRadioButton.Checked)
+            {
+                Bettor = Guys[2];
+                bettorLabel.Text = Bettor.Name;
+            }
+        }
+
+        private void joeRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (joeRadioButton.Checked)
+            {
+                Bettor = Guys[0];
+                bettorLabel.Text = Bettor.Name;
+            }
+        }
+
+        private void betButton_Click(object sender, EventArgs e)
+        {
+            Bettor.PlaceBet((int)amountNumericUpDown.Value, (int)dogNumericUpDown.Value);
         }
     }
 }

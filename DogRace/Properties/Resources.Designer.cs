@@ -63,9 +63,9 @@ namespace DogRace.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _1351301378964 {
+        internal static System.Drawing.Bitmap dog {
             get {
-                object obj = ResourceManager.GetObject("1351301378964", resourceCulture);
+                object obj = ResourceManager.GetObject("dog", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,19 +73,9 @@ namespace DogRace.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap face2 {
+        internal static System.Drawing.Bitmap racetrack {
             get {
-                object obj = ResourceManager.GetObject("face2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap gratefuldead_lighteningskull_blue_1920x1080 {
-            get {
-                object obj = ResourceManager.GetObject("gratefuldead_lighteningskull_blue_1920x1080", resourceCulture);
+                object obj = ResourceManager.GetObject("racetrack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

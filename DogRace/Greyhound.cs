@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace DogRace
 {
-    class Greyhound
+    public class Greyhound
     {
         public int StartingPosition;
         public int RacetrackLength;
@@ -17,7 +17,17 @@ namespace DogRace
 
         public bool Run()
         {
-            return false;
+            Location += Randomizer.Next(5);
+            MyPictureBox.Left = StartingPosition + Location;
+            if (Location >= RacetrackLength)
+            {
+                // Finished the race
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void TakeStartingPosition()

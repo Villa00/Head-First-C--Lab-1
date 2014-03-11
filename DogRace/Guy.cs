@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace DogRace
 {
-    class Guy
+    public class Guy
     {
         public string Name;
         public Bet MyBet;
@@ -19,7 +19,14 @@ namespace DogRace
         public void UpdateLabels()
         {
             MyRadioButton.Text = Name + " has " + Cash + " bucks";
-            MyLabel.Text = "" + MyBet.Amount;
+            if (MyBet == null)
+            {
+                MyLabel.Text = Name + " hasn't placed a bet";
+            }
+            else
+            {
+                MyLabel.Text = Name + " bets " + MyBet.Amount + " on dog " + MyBet.Dog;
+            }
         }
 
         public void ClearBet()
@@ -31,8 +38,13 @@ namespace DogRace
         {
             if (BetAmount <= Cash)
             {
-                MyBet.Amount = BetAmount;
-                MyBet.Dog = DogToWin;
+                MyBet = new Bet()
+                {
+                    Amount = BetAmount,
+                    Dog = DogToWin,
+                    Bettor = this,
+                };
+                UpdateLabels();
                 return true;
             }
             else
@@ -43,7 +55,11 @@ namespace DogRace
 
         public void Collect(int Winner)
         {
-            Cash += MyBet.PayOut(Winner);
+            if (MyBet != null)
+            {
+                Cash += MyBet.PayOut(Winner);
+                MyBet = null;
+            }
         }
     }
 }
